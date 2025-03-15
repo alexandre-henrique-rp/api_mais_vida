@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  level     String
+  message   String
+  timestamp DateTime @default(now())
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id         Int       @id @default(autoincrement())
+  name       String
+  email      String    @unique
+  cpf        String
+  whatsapp   String
+  cep        String?
+  endereco   String?
+  numero     String?
+  bairro     String?
+  cidade     String?
+  uf         String?
+  payment_id String?
+  payment    Payment[] 
+  terreno    Boolean   @default(true)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Payment {
+  id               String   @id @default(uuid())
+  valor            Float    @default(0)
+  pix_id           String?
+  notification_url String?
+  id_payment       String?
+  qr_code_base64   String?
+  link_payment     String?
+  status           String?
+  status_detail    String?
+  pg               Boolean  @default(false)
+  client_id        Int
+  Client           Client?  @relation(fields: [client_id], references: [id]) 
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
