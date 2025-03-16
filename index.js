@@ -6,6 +6,7 @@ import Logger from "./src/logger/index.js";
 
 const app = express();
 app.use(bodyParser.json());
+const port = process.env.SERVER_PORT || 3000;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -167,6 +168,6 @@ app.post("/login", async (req, res) => {
   res.send("ok");
 });
 
-app.listen(3000, () => {
-  console.log("Servidor rodando na porta 3000");
+app.listen(port, () => {
+  console.log(`Servidor rodando na porta ${port}`);
 });
