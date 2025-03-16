@@ -1,0 +1,8 @@
+{
+  "apps": [
+    {
+      "name": "api_mais_vida",
+      "script": "yarn start"
+    }
+  ]
+}
