@@ -42,8 +42,8 @@ model Client {
   cidade     String?
   uf         String?
   payment_id String?
-  payment    Payment[] 
-  terreno    Boolean   @default(true)
+  payment    Payment[]
+  terno      Boolean   @default(true)
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
 }
@@ -53,14 +53,16 @@ model Payment {
   valor            Float    @default(0)
   pix_id           String?
   notification_url String?
-  id_payment       String?
+  qr_code          String?
   qr_code_base64   String?
   link_payment     String?
   status           String?
   status_detail    String?
   pg               Boolean  @default(false)
   client_id        Int
-  Client           Client?  @relation(fields: [client_id], references: [id]) 
+  Client           Client?  @relation(fields: [client_id], references: [id])
+  dt_generated    DateTime?
+  dt_payment      DateTime?
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
 }

@@ -1,4 +1,5 @@
 import { PrismaClient } from "@prisma/client";
+import Logger from "../logger/index.js";
 
 const prisma = new PrismaClient();
 
@@ -97,7 +98,7 @@ const ClienteServer = {
    * Atualiza um cliente com base no ID fornecido
    * @param {number} id - ID do cliente a ser atualizado
    * @param { name, email, cpf, whatsapp, cep, endereco, numero, bairro, cidade, uf, payment_id} data - Dados atualizados do cliente
-   * @returns { id, name, email, cpf, whatsapp, cep, endereco, numero, bairro, cidade, uf, payment[{id, valor, qr_code_base64, link_payment, status, status_detail, pg, createdAt, updatedAt}], createdAt, updatedAt} - O cliente atualizado com detalhes de pagamento incluídos
+   * @returns {Promise<{ id, name, email, cpf, whatsapp, cep, endereco, numero, bairro, cidade, uf, payment[{id, valor, qr_code_base64, link_payment, status, status_detail, pg, createdAt, updatedAt}], createdAt, updatedAt}>} - O cliente atualizado com detalhes de pagamento incluídos
    * @throws {Error} - Erro ao atualizar cliente
    */
 
